@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <title>Лолита & Нաիրի — Свадебное приглашение</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<div id="intro">
+
+    <video
+        id="introVideo"
+        autoplay
+        muted
+        playsinline
+        preload="auto"
+    >
+        <source src="intro.mp4" type="video/mp4">
+    </video>
+
+
+    <!-- Музыка запускается одновременно с видео -->
+
+    <audio
+        id="weddingMusic"
+        preload="auto"
+        loop
+    >
+        <source src="aram-kuzes.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <!-- Пропустить видео -->
+
+    <button
+        id="skip"
+        type="button"
+    >
+        Пропустить →
+    </button>
+
+
+    <!-- Выбор языка -->
+
+    <div id="languageChoice">
+
+        <p>Выберите язык</p>
+
+        <div class="intro-languages">
+
+            <button
+                id="introRu"
+                type="button"
+            >
+                RU
+            </button>
+
+            <button
+                id="introAm"
+                type="button"
+            >
+                ՀԱՅ
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MUSIC BUTTON
+===================================================== -->
+
+<button
+    id="musicButton"
+    class="music-button"
+    type="button"
+    aria-label="Выключить музыку"
+>
+    ♫
+</button>
+
+
+
+<!-- =====================================================
+     MAIN SITE
+===================================================== -->
+
+<div id="site">
+
+
+    <!-- =================================================
+         HERO
+    ================================================== -->
+
+    <section class="hero">
+
+        <div class="hero-wrapper">
+
+            <img
+                id="heroPhoto"
+                src="photo-ru.jpg"
+                alt="Nairi & Lolita"
+            >
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         RUSSIAN
+    ================================================== -->
+
+    <div id="ru">
+
+
+        <!-- INTRO TEXT -->
+
+        <section class="invitation-content">
+
+            <h1 class="names">
+                <span>Лолита</span>
+
+                <span class="ampersand">&amp;</span>
+
+                <span>Нաիри</span>
+            </h1>
+
+
+            <div class="date">
+                13 · 11 · 2026
+            </div>
+
+
+            <div class="divider"></div>
+
+
+            <p class="invitation-text">
+                Мы будем счастливы разделить этот
+                особенный день с вами.
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LOCATION
+        ================================================== -->
+
+        <section class="section location">
+
+            <h2 class="section-title">
+                Место встречи
+            </h2>
+
+
+            <div class="location-name">
+                Mkrtchyan Hall
+            </div>
+
+
+            <div class="location-address">
+                2/10 Echmiatsin St<br>
+                Masis 0801, Armenia
+            </div>
+
+
+            <div class="location-time">
+                17:00
+            </div>
+
+
+            <a
+                class="map-button"
+                href="https://www.google.com/maps/search/?api=1&query=Restaurant%20Mkrtchyan%27s%20Hall%2C%202%2F10%20Echmiatsin%20St%2C%20Masis%200801%2C%20Armenia"
+                target="_blank"
+                rel="noopener"
+            >
+                Открыть на карте
+            </a>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RSVP
+        ================================================== -->
+
+        <section class="section rsvp">
+
+            <h2 class="section-title">
+                RSVP
+            </h2>
+
+
+            <p class="rsvp-intro">
+                Мы будем очень рады разделить этот
+                особенный день с вами.
+                <br>
+                Пожалуйста, подтвердите своё присутствие
+                на нашей свадьбе.
+            </p>
+
+
+            <div class="rsvp-form">
+
+
+                <!-- ИМЯ -->
+
+                <div class="form-group">
+
+                    <label for="nameRu">
+                        Ваше имя и фамилия
+                    </label>
+
+                    <input
+                        id="nameRu"
+                        type="text"
+                        placeholder="Имя и фамилия"
+                        autocomplete="name"
+                    >
+
+                </div>
+
+
+
+                <!-- ПРИСУТСТВИЕ -->
+
+                <div class="form-group">
+
+                    <label>
+                        Вы будете с нами?
+                    </label>
+
+
+                    <div class="radio-group">
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="attendanceRu"
+                                value="yes"
+                            >
+
+                            <span>
+                                С радостью буду ♡
+                            </span>
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="attendanceRu"
+                                value="no"
+                            >
+
+                            <span>
+                                К сожалению, не смогу
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- КОЛИЧЕСТВО ГОСТЕЙ -->
+
+                <div class="form-group">
+
+                    <label for="guestsRu">
+                        Количество гостей
+                    </label>
+
+
+                    <select id="guestsRu">
+
+                        <option value="">
+                            Выберите
+                        </option>
+
+                        <option value="1">
+                            1
+                        </option>
+
+                        <option value="2">
+                            2
+                        </option>
+
+                        <option value="3">
+                            3
+                        </option>
+
+                        <option value="4">
+                            4
+                        </option>
+
+                        <option value="5">
+                            5
+                        </option>
+
+                        <option value="6">
+                            6
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- СООБЩЕНИЕ -->
+
+                <div class="form-group">
+
+                    <label for="messageRu">
+                        Пожелание или комментарий
+                    </label>
+
+
+                    <textarea
+                        id="messageRu"
+                        placeholder="Ваше сообщение"
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- КНОПКА -->
+
+                <button
+                    id="submitRu"
+                    type="button"
+                >
+                    ПОДТВЕРДИТЬ ПРИСУТСТВИЕ
+                </button>
+
+
+                <div id="note"></div>
+
+
+                <div id="success">
+
+                    <strong>
+                        Спасибо ♡
+                    </strong>
+
+                    <p>
+                        Ваш ответ отправлен.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- =================================================
+         ARMENIAN
+    ================================================== -->
+
+    <div id="am">
+
+
+        <!-- INTRO TEXT -->
+
+        <section class="invitation-content">
+
+            <h1 class="names">
+
+                <span>
+                    Լոլիտա
+                </span>
+
+                <span class="ampersand">
+                    &amp;
+                </span>
+
+                <span>
+                    Նաիրի
+                </span>
+
+            </h1>
+
+
+            <div class="date">
+                13 · 11 · 2026
+            </div>
+
+
+            <div class="divider"></div>
+
+
+            <p class="invitation-text">
+                Մենք շատ ուրախ կլինենք այս յուրահատուկ
+                օրը կիսել Ձեզ հետ։
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LOCATION
+        ================================================== -->
+
+        <section class="section location">
+
+            <h2 class="section-title">
+                Հանդիպման վայր
+            </h2>
+
+
+            <div class="location-name">
+                Mkrtchyan Hall
+            </div>
+
+
+            <div class="location-address">
+                2/10 Echmiatsin St<br>
+                Masis 0801, Armenia
+            </div>
+
+
+            <div class="location-time">
+                17:00
+            </div>
+
+
+            <a
+                class="map-button"
+                href="https://www.google.com/maps/search/?api=1&query=Restaurant%20Mkrtchyan%27s%20Hall%2C%202%2F10%20Echmiatsin%20St%2C%20Masis%200801%2C%20Armenia"
+                target="_blank"
+                rel="noopener"
+            >
+                Բացել քարտեզը
+            </a>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RSVP ARMENIAN
+        ================================================== -->
+
+        <section class="section rsvp">
+
+            <h2 class="section-title">
+                RSVP
+            </h2>
+
+
+            <p class="rsvp-intro">
+                Մենք շատ ուրախ կլինենք այս յուրահատուկ օրը
+                կիսել Ձեզ հետ։
+                <br>
+                Խնդրում ենք հաստատել Ձեր ներկայությունը։
+            </p>
+
+
+            <div class="rsvp-form">
+
+
+                <!-- ИМЯ -->
+
+                <div class="form-group">
+
+                    <label for="nameAm">
+                        Ձեր անունը և ազգանունը
+                    </label>
+
+
+                    <input
+                        id="nameAm"
+                        type="text"
+                        placeholder="Անուն և ազգանուն"
+                        autocomplete="name"
+                    >
+
+                </div>
+
+
+
+                <!-- ПРИСУТСТВИЕ -->
+
+                <div class="form-group">
+
+                    <label>
+                        Կլինե՞ք մեզ հետ
+                    </label>
+
+
+                    <div class="radio-group">
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="attendanceAm"
+                                value="yes"
+                            >
+
+                            <span>
+                                Սիրով կմասնակցեմ ♡
+                            </span>
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="attendanceAm"
+                                value="no"
+                            >
+
+                            <span>
+                                Ցավոք, չեմ կարողանա
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ГОСТИ -->
+
+                <div class="form-group">
+
+                    <label for="guestsAm">
+                        Հյուրերի քանակը
+                    </label>
+
+
+                    <select id="guestsAm">
+
+                        <option value="">
+                            Ընտրեք
+                        </option>
+
+                        <option value="1">
+                            1
+                        </option>
+
+                        <option value="2">
+                            2
+                        </option>
+
+                        <option value="3">
+                            3
+                        </option>
+
+                        <option value="4">
+                            4
+                        </option>
+
+                        <option value="5">
+                            5
+                        </option>
+
+                        <option value="6">
+                            6
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- СООБЩЕНИЕ -->
+
+                <div class="form-group">
+
+                    <label for="messageAm">
+                        Ցանկություն կամ մեկնաբանություն
+                    </label>
+
+
+                    <textarea
+                        id="messageAm"
+                        placeholder="Ձեր հաղորդագրությունը"
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- КНОПКА -->
+
+                <button
+                    id="submitAm"
+                    type="button"
+                >
+                    ՀԱՍՏԱՏԵԼ ՆԵՐԿԱՅՈՒԹՅՈՒՆԸ
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-names">
+            Լոլիտա &amp; Նաիրի
+        </div>
+
+        <div class="footer-date">
+            13 · 11 · 2026
+        </div>
+
+    </footer>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
