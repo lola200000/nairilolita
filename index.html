@@ -11,57 +11,104 @@
 
 <body>
 
-    <!-- Вступительное видео -->
+    <!-- ================= INTRO VIDEO ================= -->
+
     <div id="intro">
-        <video id="introVideo" autoplay muted playsinline preload="auto">
+
+        <video
+            id="introVideo"
+            autoplay
+            muted
+            playsinline
+            preload="auto"
+        >
             <source src="intro.mp4" type="video/mp4">
         </video>
 
         <button id="skip" type="button">
             Пропустить →
         </button>
+
     </div>
 
-    <!-- Музыка -->
-    <audio id="weddingMusic" loop>
+
+    <!-- ================= MUSIC ================= -->
+
+    <audio id="weddingMusic" loop preload="auto">
         <source src="aram-kuzes.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Кнопка музыки -->
-    <button id="musicButton" class="music-button" type="button"
-            aria-label="Включить или выключить музыку">
+
+    <!-- ================= MUSIC BUTTON ================= -->
+
+    <button
+        id="musicButton"
+        class="music-button"
+        type="button"
+        aria-label="Музыка"
+    >
         ♫
     </button>
 
-    <!-- Выбор языка -->
-    <div id="languageChoice" class="language-choice">
-        <p class="language-heading">Выберите язык</p>
 
-        <div class="language-buttons">
-            <button id="introRu" type="button">РУССКИЙ</button>
-            <button id="introAm" type="button">ՀԱՅԵՐԵՆ</button>
+    <!-- ================= LANGUAGE ================= -->
+
+    <div id="languageChoice" class="language-choice">
+
+        <div class="language-box">
+
+            <p class="language-heading">
+                Выберите язык
+            </p>
+
+            <div class="language-buttons">
+
+                <button id="introRu" type="button">
+                    РУССКИЙ
+                </button>
+
+                <button id="introAm" type="button">
+                    ՀԱՅԵՐԵՆ
+                </button>
+
+            </div>
+
         </div>
+
     </div>
 
-    <!-- Основной сайт -->
+
+    <!-- ================= MAIN SITE ================= -->
+
     <main id="site">
 
-        <!-- ================= РУССКАЯ ВЕРСИЯ ================= -->
+
+        <!-- ==================================================
+             RUSSIAN VERSION
+        ================================================== -->
+
         <div id="ru" class="language-page">
 
-            <!-- Первая фотография -->
+
+            <!-- FIRST PHOTO -->
+
             <section class="photo-section">
+
                 <img
                     src="photo-rus.jpg"
                     alt="Наири и Лолита"
                 >
+
             </section>
 
-            <!-- Вторая фотография + кнопка карты -->
+
+            <!-- SECOND PHOTO + MAP -->
+
             <section class="photo-section map-page">
+
                 <img
                     src="photo1-rus.jpg"
-                    alt="Свадебное приглашение"
+                    alt="Наири и Лолита"
                 >
 
                 <a
@@ -73,26 +120,38 @@
                     <span class="map-icon">⌖</span>
                     ОТКРЫТЬ КАРТУ
                 </a>
+
             </section>
 
+
             <!-- RSVP -->
+
             <section class="rsvp-section">
+
                 <div class="rsvp-photo">
+
                     <img
                         src="RSVP.jpg"
-                        alt="Свадебное приглашение"
+                        alt="RSVP"
                     >
 
                     <div class="rsvp-overlay">
+
                         <div class="rsvp-content">
 
-                            <div class="rsvp-title">RSVP</div>
+                            <div class="rsvp-title">
+                                RSVP
+                            </div>
 
                             <p class="rsvp-subtitle">
                                 Подтвердите своё присутствие
                             </p>
 
-                            <form id="rsvpFormRu" class="rsvp-form">
+
+                            <form
+                                id="rsvpFormRu"
+                                class="rsvp-form"
+                            >
 
                                 <label for="nameRu">
                                     Ваше имя и фамилия
@@ -103,8 +162,10 @@
                                     name="name"
                                     type="text"
                                     placeholder="Имя и фамилия"
+                                    autocomplete="name"
                                     required
                                 >
+
 
                                 <label for="attendanceRu">
                                     Вы будете с нами?
@@ -115,29 +176,47 @@
                                     name="attendance"
                                     required
                                 >
-                                    <option value="" disabled selected>
+
+                                    <option
+                                        value=""
+                                        disabled
+                                        selected
+                                    >
                                         Выберите ответ
                                     </option>
 
-                                    <option value="С радостью буду">
+                                    <option value="yes">
                                         С радостью буду ♡
                                     </option>
 
-                                    <option value="К сожалению, не смогу">
+                                    <option value="no">
                                         К сожалению, не смогу
                                     </option>
+
                                 </select>
+
 
                                 <label for="guestsRu">
                                     Количество гостей
                                 </label>
 
-                                <select id="guestsRu" name="guests" required>
+                                <select
+                                    id="guestsRu"
+                                    name="guests"
+                                    required
+                                >
+
+                                    <option value="" disabled selected>
+                                        Выберите количество
+                                    </option>
+
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
+
                                 </select>
+
 
                                 <label for="messageRu">
                                     Пожелание или комментарий
@@ -150,6 +229,7 @@
                                     placeholder="Ваше сообщение"
                                 ></textarea>
 
+
                                 <button
                                     id="submitRu"
                                     class="rsvp-submit"
@@ -158,35 +238,58 @@
                                     ПОДТВЕРДИТЬ ПРИСУТСТВИЕ
                                 </button>
 
-                                <p id="noteRu" class="form-note"></p>
-                                <p id="successRu" class="form-success"
-                                   aria-live="polite"></p>
+
+                                <p
+                                    id="noteRu"
+                                    class="form-note"
+                                ></p>
+
+                                <p
+                                    id="successRu"
+                                    class="form-success"
+                                    aria-live="polite"
+                                ></p>
 
                             </form>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </section>
 
         </div>
 
 
-        <!-- ================= АРМЯНСКАЯ ВЕРСИЯ ================= -->
+
+        <!-- ==================================================
+             ARMENIAN VERSION
+        ================================================== -->
+
         <div id="am" class="language-page">
 
-            <!-- Առաջին լուսանկար -->
+
+            <!-- FIRST PHOTO -->
+
             <section class="photo-section">
+
                 <img
                     src="photo-am.jpg"
                     alt="Նաիրի և Լոլիտա"
                 >
+
             </section>
 
-            <!-- Երկրորդ լուսանկար + քարտեզի կոճակ -->
+
+            <!-- SECOND PHOTO + MAP -->
+
             <section class="photo-section map-page">
+
                 <img
                     src="photo1-am.jpg"
-                    alt="Հարսանեկան հրավեր"
+                    alt="Նաիրի և Լոլիտա"
                 >
 
                 <a
@@ -198,26 +301,38 @@
                     <span class="map-icon">⌖</span>
                     ԲԱՑԵԼ ՔԱՐՏԵԶԸ
                 </a>
+
             </section>
 
+
             <!-- RSVP -->
+
             <section class="rsvp-section">
+
                 <div class="rsvp-photo">
+
                     <img
                         src="RSVP.jpg"
-                        alt="Հարսանեկան հրավեր"
+                        alt="RSVP"
                     >
 
                     <div class="rsvp-overlay">
+
                         <div class="rsvp-content">
 
-                            <div class="rsvp-title">RSVP</div>
+                            <div class="rsvp-title">
+                                RSVP
+                            </div>
 
                             <p class="rsvp-subtitle">
                                 Խնդրում ենք հաստատել Ձեր ներկայությունը
                             </p>
 
-                            <form id="rsvpFormAm" class="rsvp-form">
+
+                            <form
+                                id="rsvpFormAm"
+                                class="rsvp-form"
+                            >
 
                                 <label for="nameAm">
                                     Ձեր անունը և ազգանունը
@@ -228,8 +343,10 @@
                                     name="name"
                                     type="text"
                                     placeholder="Անուն և ազգանուն"
+                                    autocomplete="name"
                                     required
                                 >
+
 
                                 <label for="attendanceAm">
                                     Կլինե՞ք մեզ հետ
@@ -240,29 +357,47 @@
                                     name="attendance"
                                     required
                                 >
-                                    <option value="" disabled selected>
+
+                                    <option
+                                        value=""
+                                        disabled
+                                        selected
+                                    >
                                         Ընտրեք պատասխանը
                                     </option>
 
-                                    <option value="Սիրով կմասնակցեմ">
+                                    <option value="yes">
                                         Սիրով կմասնակցեմ ♡
                                     </option>
 
-                                    <option value="Ցավոք, չեմ կարողանա">
+                                    <option value="no">
                                         Ցավոք, չեմ կարողանա
                                     </option>
+
                                 </select>
+
 
                                 <label for="guestsAm">
                                     Հյուրերի քանակը
                                 </label>
 
-                                <select id="guestsAm" name="guests" required>
+                                <select
+                                    id="guestsAm"
+                                    name="guests"
+                                    required
+                                >
+
+                                    <option value="" disabled selected>
+                                        Ընտրեք քանակը
+                                    </option>
+
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
+
                                 </select>
+
 
                                 <label for="messageAm">
                                     Ցանկություն կամ մեկնաբանություն
@@ -275,6 +410,7 @@
                                     placeholder="Ձեր հաղորդագրությունը"
                                 ></textarea>
 
+
                                 <button
                                     id="submitAm"
                                     class="rsvp-submit"
@@ -283,20 +419,34 @@
                                     ՀԱՍՏԱՏԵԼ ՆԵՐԿԱՅՈՒԹՅՈՒՆԸ
                                 </button>
 
-                                <p id="noteAm" class="form-note"></p>
-                                <p id="successAm" class="form-success"
-                                   aria-live="polite"></p>
+
+                                <p
+                                    id="noteAm"
+                                    class="form-note"
+                                ></p>
+
+                                <p
+                                    id="successAm"
+                                    class="form-success"
+                                    aria-live="polite"
+                                ></p>
 
                             </form>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </section>
 
         </div>
 
     </main>
 
+
     <script src="script.js"></script>
+
 </body>
 </html>

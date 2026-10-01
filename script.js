@@ -1,9 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =========================================
-       ELEMENTS
-    ========================================= */
-
     const intro = document.getElementById("intro");
     const introVideo = document.getElementById("introVideo");
     const skip = document.getElementById("skip");
@@ -13,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const introAm = document.getElementById("introAm");
 
     const site = document.getElementById("site");
-
     const ru = document.getElementById("ru");
     const am = document.getElementById("am");
 
@@ -22,55 +17,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       INTRO MEDIA
+       НАЧАЛЬНОЕ СОСТОЯНИЕ
     ========================================= */
 
-    function startMusic() {
+    site.style.display = "none";
+    languageChoice.style.display = "none";
 
-        if (!weddingMusic) return;
+    ru.style.display = "none";
+    am.style.display = "none";
 
-        weddingMusic.volume = 0.45;
+    musicButton.style.display = "none";
 
-        const playPromise = weddingMusic.play();
 
-        if (playPromise !== undefined) {
-            playPromise.catch(() => {
-                console.log("Музыка ожидает действия пользователя.");
-            });
+    /* =========================================
+       ПОКАЗАТЬ ВЫБОР ЯЗЫКА
+    ========================================= */
+
+    function showLanguageChoice() {
+
+        // Останавливаем видео
+        if (introVideo) {
+            introVideo.pause();
         }
-    }
 
-
-    function updateMusicButton() {
-
-        if (!musicButton || !weddingMusic) return;
-
-        if (weddingMusic.paused) {
-            musicButton.textContent = "♪";
-        } else {
-            musicButton.textContent = "♫";
+        // Убираем кнопку "Пропустить"
+        if (skip) {
+            skip.style.display = "none";
         }
+
+        // Убираем intro
+        if (intro) {
+            intro.style.display = "none";
+        }
+
+        // ПОКАЗЫВАЕМ ЯЗЫКИ
+        languageChoice.style.display = "flex";
+
+        // Показываем кнопку музыки
+        musicButton.style.display = "flex";
+
+        console.log("Выбор языка показан");
     }
 
 
     /* =========================================
-       START INTRO
-    ========================================= */
-
-    if (introVideo) {
-
-        introVideo.play().catch(() => {
-            console.log("Видео ожидает действия пользователя.");
-        });
-
-    }
-
-    startMusic();
-    updateMusicButton();
-
-
-    /* =========================================
-       VIDEO ENDED
+       КОНЕЦ ВИДЕО
     ========================================= */
 
     if (introVideo) {
@@ -85,16 +76,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       SKIP BUTTON
+       КНОПКА ПРОПУСТИТЬ
     ========================================= */
 
     if (skip) {
 
         skip.addEventListener("click", () => {
 
-            if (introVideo) {
-                introVideo.pause();
-            }
+            console.log("Нажата кнопка Пропустить");
 
             showLanguageChoice();
 
@@ -104,64 +93,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       SHOW LANGUAGE
-    ========================================= */
-
-    function showLanguageChoice() {
-
-        if (!languageChoice) return;
-
-        languageChoice.classList.add("show");
-
-        if (skip) {
-            skip.style.display = "none";
-        }
-
-    }
-
-
-    /* =========================================
-       MUSIC BUTTON
-    ========================================= */
-
-    if (musicButton) {
-
-        musicButton.addEventListener("click", async () => {
-
-            if (!weddingMusic) return;
-
-            if (weddingMusic.paused) {
-
-                try {
-
-                    await weddingMusic.play();
-
-                } catch (error) {
-
-                    console.log("Не удалось включить музыку.");
-
-                }
-
-            } else {
-
-                weddingMusic.pause();
-
-            }
-
-            updateMusicButton();
-
-        });
-
-    }
-
-
-    /* =========================================
-       LANGUAGE BUTTONS
+       РУССКИЙ
     ========================================= */
 
     if (introRu) {
 
         introRu.addEventListener("click", () => {
+
+            console.log("Выбран русский");
 
             openSite("ru");
 
@@ -170,9 +109,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    /* =========================================
+       АРМЯНСКИЙ
+    ========================================= */
+
     if (introAm) {
 
         introAm.addEventListener("click", () => {
+
+            console.log("Выбран армянский");
 
             openSite("am");
 
@@ -182,130 +127,108 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       OPEN SITE
+       ОТКРЫТЬ САЙТ
     ========================================= */
 
     function openSite(language) {
 
-        /*
-         * Повторно пытаемся запустить музыку после
-         * действия пользователя.
-         */
+        languageChoice.style.display = "none";
 
-        if (weddingMusic && weddingMusic.paused) {
-
-            weddingMusic.play()
-                .then(() => {
-                    updateMusicButton();
-                })
-                .catch(() => {
-                    console.log("Музыка не запустилась.");
-                });
-
-        }
-
+        site.style.display = "block";
 
         if (language === "ru") {
 
-            setRussian();
+            ru.style.display = "block";
+            am.style.display = "none";
+
+            document.documentElement.lang = "ru";
 
         } else {
 
-            setArmenian();
-
-        }
-
-
-        if (site) {
-
-            site.classList.add("show");
-
-        }
-
-
-        if (languageChoice) {
-
-            languageChoice.classList.remove("show");
-
-        }
-
-
-        if (intro) {
-
-            intro.style.opacity = "0";
-
-            setTimeout(() => {
-
-                intro.style.display = "none";
-
-            }, 700);
-
-        }
-
-    }
-
-
-    /* =========================================
-       RUSSIAN
-    ========================================= */
-
-    function setRussian() {
-
-        if (ru) {
-
-            ru.style.display = "block";
-
-        }
-
-        if (am) {
-
-            am.style.display = "none";
-
-        }
-
-        document.documentElement.lang = "ru";
-
-        window.scrollTo({
-            top: 0,
-            behavior: "instant"
-        });
-
-    }
-
-
-    /* =========================================
-       ARMENIAN
-    ========================================= */
-
-    function setArmenian() {
-
-        if (am) {
-
             am.style.display = "block";
-
-        }
-
-        if (ru) {
-
             ru.style.display = "none";
 
+            document.documentElement.lang = "hy";
         }
 
-        document.documentElement.lang = "hy";
 
-        window.scrollTo({
-            top: 0,
-            behavior: "instant"
+        // Музыка
+        startMusic();
+
+
+        // Вверх страницы
+        window.scrollTo(0, 0);
+
+    }
+
+
+    /* =========================================
+       МУЗЫКА
+    ========================================= */
+
+    function startMusic() {
+
+        if (!weddingMusic) {
+            return;
+        }
+
+        weddingMusic.volume = 0.45;
+
+        weddingMusic.play()
+            .then(() => {
+
+                musicButton.textContent = "♫";
+
+            })
+            .catch(() => {
+
+                console.log(
+                    "Автозапуск музыки заблокирован браузером"
+                );
+
+            });
+
+    }
+
+
+    /* =========================================
+       КНОПКА МУЗЫКИ
+    ========================================= */
+
+    if (musicButton) {
+
+        musicButton.addEventListener("click", () => {
+
+            if (weddingMusic.paused) {
+
+                weddingMusic.play()
+                    .then(() => {
+
+                        musicButton.textContent = "♫";
+
+                    })
+                    .catch(() => {});
+
+            } else {
+
+                weddingMusic.pause();
+
+                musicButton.textContent = "♪";
+
+            }
+
         });
 
     }
 
 
     /* =========================================
-       RSVP — RUSSIAN
+       RSVP — РУССКИЙ
     ========================================= */
 
-    const rsvpFormRu = document.getElementById("rsvpFormRu");
+    const rsvpFormRu =
+        document.getElementById("rsvpFormRu");
+
 
     if (rsvpFormRu) {
 
@@ -321,10 +244,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       RSVP — ARMENIAN
+       RSVP — АРМЯНСКИЙ
     ========================================= */
 
-    const rsvpFormAm = document.getElementById("rsvpFormAm");
+    const rsvpFormAm =
+        document.getElementById("rsvpFormAm");
+
 
     if (rsvpFormAm) {
 
@@ -340,7 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       SEND RSVP
+       ОТПРАВКА RSVP
     ========================================= */
 
     async function sendRSVP(language) {
@@ -349,64 +274,77 @@ document.addEventListener("DOMContentLoaded", () => {
         let attendance;
         let guests;
         let message;
+
         let submitButton;
         let note;
         let success;
+        let form;
 
-
-        /* -----------------------------------------
-           GET RUSSIAN DATA
-        ----------------------------------------- */
 
         if (language === "ru") {
 
-            name = document.getElementById("nameRu")?.value.trim();
+            form = rsvpFormRu;
 
-            attendance = document.querySelector(
-                'input[name="attendanceRu"]:checked'
-            )?.value;
+            name = document
+                .getElementById("nameRu")
+                .value
+                .trim();
 
-            guests = document.getElementById("guestsRu")?.value;
+            attendance = document
+                .getElementById("attendanceRu")
+                .value;
 
-            message = document.getElementById("messageRu")?.value.trim();
+            guests = document
+                .getElementById("guestsRu")
+                .value;
 
-            submitButton = document.getElementById("submitRu");
+            message = document
+                .getElementById("messageRu")
+                .value
+                .trim();
 
-            note = document.getElementById("noteRu");
+            submitButton =
+                document.getElementById("submitRu");
 
-            success = document.getElementById("successRu");
+            note =
+                document.getElementById("noteRu");
+
+            success =
+                document.getElementById("successRu");
+
+        } else {
+
+            form = rsvpFormAm;
+
+            name = document
+                .getElementById("nameAm")
+                .value
+                .trim();
+
+            attendance = document
+                .getElementById("attendanceAm")
+                .value;
+
+            guests = document
+                .getElementById("guestsAm")
+                .value;
+
+            message = document
+                .getElementById("messageAm")
+                .value
+                .trim();
+
+            submitButton =
+                document.getElementById("submitAm");
+
+            note =
+                document.getElementById("noteAm");
+
+            success =
+                document.getElementById("successAm");
 
         }
 
-
-        /* -----------------------------------------
-           GET ARMENIAN DATA
-        ----------------------------------------- */
-
-        else {
-
-            name = document.getElementById("nameAm")?.value.trim();
-
-            attendance = document.querySelector(
-                'input[name="attendanceAm"]:checked'
-            )?.value;
-
-            guests = document.getElementById("guestsAm")?.value;
-
-            message = document.getElementById("messageAm")?.value.trim();
-
-            submitButton = document.getElementById("submitAm");
-
-            note = document.getElementById("noteAm");
-
-            success = document.getElementById("successAm");
-
-        }
-
-
-        /* -----------------------------------------
-           CLEAR MESSAGES
-        ----------------------------------------- */
 
         if (note) {
             note.textContent = "";
@@ -417,113 +355,44 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* -----------------------------------------
-           VALIDATION
-        ----------------------------------------- */
+        /* ПРОВЕРКА */
 
-        if (!name) {
+        if (!name || !attendance || !guests) {
 
-            if (note) {
-
-                note.textContent =
-                    language === "ru"
-                        ? "Пожалуйста, укажите имя."
-                        : "Խնդրում ենք նշել անունը։";
-
-            }
-
-            return;
-
-        }
-
-
-        if (!attendance) {
-
-            if (note) {
-
-                note.textContent =
-                    language === "ru"
-                        ? "Пожалуйста, укажите, сможете ли вы прийти."
-                        : "Խնդրում ենք նշել՝ կկարողանա՞ք գալ։";
-
-            }
-
-            return;
-
-        }
-
-
-        if (!guests) {
-
-            if (note) {
-
-                note.textContent =
-                    language === "ru"
-                        ? "Пожалуйста, укажите количество гостей."
-                        : "Խնդրում ենք նշել հյուրերի քանակը։";
-
-            }
-
-            return;
-
-        }
-
-
-        /* -----------------------------------------
-           BUTTON
-        ----------------------------------------- */
-
-        if (submitButton) {
-
-            submitButton.disabled = true;
-
-            submitButton.dataset.originalText =
-                submitButton.textContent;
-
-            submitButton.textContent =
+            note.textContent =
                 language === "ru"
-                    ? "ОТПРАВКА..."
-                    : "ՈՒՂԱՐԿՈՒՄ...";
+                    ? "Пожалуйста, заполните обязательные поля."
+                    : "Խնդրում ենք լրացնել պարտադիր դաշտերը։";
 
+            return;
         }
 
 
-        /* -----------------------------------------
-           TEXT
-        ----------------------------------------- */
-
-        let attendanceText;
-
-        if (language === "ru") {
-
-            attendanceText =
-                attendance === "yes"
-                    ? "С радостью буду ❤️"
-                    : "К сожалению, не смогу";
-
-        } else {
-
-            attendanceText =
-                attendance === "yes"
-                    ? "Սիրով կմասնակցեմ ❤️"
-                    : "Ցավոք, չեմ կարողանա";
-
-        }
+        submitButton.disabled = true;
 
 
-        const languageText =
+        const attendanceText =
             language === "ru"
-                ? "Русский"
-                : "Հայերեն";
+
+                ? (
+                    attendance === "yes"
+                        ? "С радостью буду"
+                        : "К сожалению, не смогу"
+                )
+
+                : (
+                    attendance === "yes"
+                        ? "Սիրով կմասնակցեմ"
+                        : "Ցավոք, չեմ կարողանա"
+                );
 
 
-        /* -----------------------------------------
-           FORM DATA
-        ----------------------------------------- */
+        const data = {
 
-        const formData = {
-
-            language: languageText,
+            language:
+                language === "ru"
+                    ? "Русский"
+                    : "Հայերեն",
 
             name: name,
 
@@ -537,13 +406,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 "RSVP — " +
                 name +
                 " — Nairi & Lolita"
-
         };
 
-
-        /* -----------------------------------------
-           SEND TO FORMSUBMIT
-        ----------------------------------------- */
 
         try {
 
@@ -557,132 +421,52 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Accept": "application/json"
                     },
 
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify(data)
                 }
             );
 
 
-            const data = await response.json();
+            const result = await response.json();
 
 
-            /* -------------------------------------
-               SUCCESS
-            ------------------------------------- */
+            if (response.ok && result.success !== false) {
 
-            if (response.ok && data.success !== false) {
+                success.textContent =
+                    language === "ru"
 
-                if (success) {
+                        ? "Спасибо ♥ Ваш ответ отправлен."
 
-                    success.textContent =
-                        language === "ru"
-                            ? "Спасибо ♥ Ваш ответ отправлен."
-                            : "Շնորհակալություն ♥ Ձեր պատասխանը ուղարկված է։";
+                        : "Շնորհակալություն ♥ Ձեր պատասխանը ուղարկված է։";
 
-                }
+                form.reset();
 
-                if (note) {
-                    note.textContent = "";
-                }
-
-
-                /*
-                 * Очищаем форму
-                 */
-
-                if (language === "ru") {
-
-                    rsvpFormRu?.reset();
-
-                } else {
-
-                    rsvpFormAm?.reset();
-
-                }
-
-            }
-
-
-            /* -------------------------------------
-               ERROR
-            ------------------------------------- */
-
-            else {
-
-                if (note) {
-
-                    note.textContent =
-                        language === "ru"
-                            ? "Не удалось отправить ответ. Попробуйте ещё раз."
-                            : "Չհաջողվեց ուղարկել պատասխանը։ Փորձեք կրկին։";
-
-                }
-
-                console.log("FormSubmit error:", data);
-
-            }
-
-        }
-
-
-        /* -----------------------------------------
-           NETWORK ERROR
-        ----------------------------------------- */
-
-        catch (error) {
-
-            console.error(error);
-
-            if (note) {
+            } else {
 
                 note.textContent =
                     language === "ru"
-                        ? "Ошибка соединения. Попробуйте ещё раз."
-                        : "Կապի սխալ։ Փորձեք կրկին։";
+
+                        ? "Не удалось отправить ответ."
+
+                        : "Չհաջողվեց ուղարկել պատասխանը։";
 
             }
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            note.textContent =
+                language === "ru"
+
+                    ? "Ошибка соединения."
+
+                    : "Կապի սխալ։";
 
         }
 
 
-        /* -----------------------------------------
-           RETURN BUTTON
-        ----------------------------------------- */
-
-        finally {
-
-            if (submitButton) {
-
-                submitButton.disabled = false;
-
-                submitButton.textContent =
-                    submitButton.dataset.originalText;
-
-            }
-
-        }
-
-    }
-
-
-    /* =========================================
-       INITIAL STATE
-    ========================================= */
-
-    if (site) {
-
-        site.classList.remove("show");
-
-    }
-
-    if (ru) {
-
-        ru.style.display = "none";
-
-    }
-
-    if (am) {
-
-        am.style.display = "none";
+        submitButton.disabled = false;
 
     }
 
