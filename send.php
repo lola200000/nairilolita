@@ -25,11 +25,11 @@ if (!$data) {
 // Данные из формы
 // ==========================
 
-$language  = $data['language'] ?? '';
-$name      = trim($data['name'] ?? '');
+$language   = $data['language'] ?? '';
+$name       = trim($data['name'] ?? '');
 $attendance = $data['attendance'] ?? '';
-$guests    = $data['guests'] ?? '';
-$message   = trim($data['message'] ?? '');
+$guests     = $data['guests'] ?? '';
+$message    = trim($data['message'] ?? '');
 
 
 // ==========================
@@ -62,28 +62,56 @@ if ($guests === '') {
 
 
 // ==========================
-// Перевод языка
+// Язык формы
 // ==========================
 
 if ($language === 'ru') {
+
     $languageText = 'Русский';
+
 } elseif ($language === 'am') {
+
     $languageText = 'Հայերեն';
+
 } else {
+
     $languageText = $language;
 }
 
 
 // ==========================
-// Перевод ответа
+// Ответ о присутствии
 // ==========================
 
-if ($attendance === 'yes') {
-    $attendanceText = 'Да, буду ❤️';
-} elseif ($attendance === 'no') {
-    $attendanceText = 'К сожалению, не смогу';
+if ($language === 'am') {
+
+    if ($attendance === 'yes') {
+
+        $attendanceText = 'Սիրով կմասնակցեմ ❤️';
+
+    } elseif ($attendance === 'no') {
+
+        $attendanceText = 'Ցավոք, չեմ կարողանա';
+
+    } else {
+
+        $attendanceText = $attendance;
+    }
+
 } else {
-    $attendanceText = $attendance;
+
+    if ($attendance === 'yes') {
+
+        $attendanceText = 'Да, буду ❤️';
+
+    } elseif ($attendance === 'no') {
+
+        $attendanceText = 'К сожалению, не смогу';
+
+    } else {
+
+        $attendanceText = $attendance;
+    }
 }
 
 
@@ -110,7 +138,7 @@ $emailBody = "
 
 ━━━━━━━━━━━━━━━━━━━━
 
-Лолита & Наири
+Лолита & Նաիրի
 13 ноября 2026
 
 Место:
@@ -124,9 +152,11 @@ Masis 0801, Armenia
 
 Имя: $name
 
-Присутствие: $attendanceText
+Присутствие:
+$attendanceText
 
-Количество гостей: $guests
+Количество гостей:
+$guests
 
 Комментарий:
 $message
