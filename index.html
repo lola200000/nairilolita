@@ -153,6 +153,8 @@
                                 class="rsvp-form"
                             >
 
+                                <!-- ИМЯ -->
+
                                 <label for="nameRu">
                                     Ваше имя и фамилия
                                 </label>
@@ -166,6 +168,8 @@
                                     required
                                 >
 
+
+                                <!-- ПРИСУТСТВИЕ -->
 
                                 <label for="attendanceRu">
                                     Вы будете с нами?
@@ -196,30 +200,42 @@
                                 </select>
 
 
+                                <!-- СТОРОНА -->
+
+                                <label for="sideRu">
+                                    С чьей стороны вы будете?
+                                </label>
+
+                                <select
+                                    id="sideRu"
+                                    name="side"
+                                    required
+                                >
+
+                                    <option
+                                        value=""
+                                        disabled
+                                        selected
+                                    >
+                                        Выберите сторону
+                                    </option>
+
+                                    <option value="groom">
+                                        Со стороны жениха
+                                    </option>
+
+                                    <option value="bride">
+                                        Со стороны невесты
+                                    </option>
+
+                                </select>
+
+
+                                <!-- КОЛИЧЕСТВО ГОСТЕЙ -->
+
                                 <label for="guestsRu">
                                     Количество гостей
                                 </label>
-                                <label for="sideRu">
-    С чьей стороны вы будете?
-</label>
-
-<select
-    id="sideRu"
-    name="side"
-    required
->
-    <option value="" disabled selected>
-        Выберите сторону
-    </option>
-
-    <option value="groom">
-        Со стороны жениха
-    </option>
-
-    <option value="bride">
-        Со стороны невесты
-    </option>
-</select>
 
                                 <select
                                     id="guestsRu"
@@ -227,17 +243,34 @@
                                     required
                                 >
 
-                                    <option value="" disabled selected>
+                                    <option
+                                        value=""
+                                        disabled
+                                        selected
+                                    >
                                         Выберите количество
                                     </option>
 
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
+                                    <option value="1">
+                                        1
+                                    </option>
+
+                                    <option value="2">
+                                        2
+                                    </option>
+
+                                    <option value="3">
+                                        3
+                                    </option>
+
+                                    <option value="4">
+                                        4
+                                    </option>
 
                                 </select>
 
+
+                                <!-- СООБЩЕНИЕ -->
 
                                 <label for="messageRu">
                                     Пожелание или комментарий
@@ -251,6 +284,8 @@
                                 ></textarea>
 
 
+                                <!-- КНОПКА -->
+
                                 <button
                                     id="submitRu"
                                     class="rsvp-submit"
@@ -260,10 +295,15 @@
                                 </button>
 
 
+                                <!-- СООБЩЕНИЕ ОБ ОШИБКЕ -->
+
                                 <p
                                     id="noteRu"
                                     class="form-note"
                                 ></p>
+
+
+                                <!-- УСПЕШНАЯ ОТПРАВКА -->
 
                                 <p
                                     id="successRu"
@@ -355,6 +395,8 @@
                                 class="rsvp-form"
                             >
 
+                                <!-- ИМЯ -->
+
                                 <label for="nameAm">
                                     Ձեր անունը և ազգանունը
                                 </label>
@@ -368,6 +410,8 @@
                                     required
                                 >
 
+
+                                <!-- ПРИСУТСТВИЕ -->
 
                                 <label for="attendanceAm">
                                     Կլինե՞ք մեզ հետ
@@ -398,30 +442,42 @@
                                 </select>
 
 
+                                <!-- СТОРОНА -->
+
+                                <label for="sideAm">
+                                    Ո՞ր կողմից եք լինելու
+                                </label>
+
+                                <select
+                                    id="sideAm"
+                                    name="side"
+                                    required
+                                >
+
+                                    <option
+                                        value=""
+                                        disabled
+                                        selected
+                                    >
+                                        Ընտրեք կողմը
+                                    </option>
+
+                                    <option value="groom">
+                                        Փեսայի կողմից
+                                    </option>
+
+                                    <option value="bride">
+                                        Հարսի կողմից
+                                    </option>
+
+                                </select>
+
+
+                                <!-- КОЛИЧЕСТВО ГОСТЕЙ -->
+
                                 <label for="guestsAm">
                                     Հյուրերի քանակը
                                 </label>
-                                <label for="sideAm">
-    Ո՞ր կողմից եք լինելու
-</label>
-
-<select
-    id="sideAm"
-    name="side"
-    required
->
-    <option value="" disabled selected>
-        Ընտրեք կողմը
-    </option>
-
-    <option value="groom">
-        Փեսայի կողմից
-    </option>
-
-    <option value="bride">
-        Հարսի կողմից
-    </option>
-</select>
 
                                 <select
                                     id="guestsAm"
@@ -429,17 +485,34 @@
                                     required
                                 >
 
-                                    <option value="" disabled selected>
+                                    <option
+                                        value=""
+                                        disabled
+                                        selected
+                                    >
                                         Ընտրեք քանակը
                                     </option>
 
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
+                                    <option value="1">
+                                        1
+                                    </option>
+
+                                    <option value="2">
+                                        2
+                                    </option>
+
+                                    <option value="3">
+                                        3
+                                    </option>
+
+                                    <option value="4">
+                                        4
+                                    </option>
 
                                 </select>
 
+
+                                <!-- СООБЩЕНИЕ -->
 
                                 <label for="messageAm">
                                     Ցանկություն կամ մեկնաբանություն
@@ -453,6 +526,8 @@
                                 ></textarea>
 
 
+                                <!-- КНОПКА -->
+
                                 <button
                                     id="submitAm"
                                     class="rsvp-submit"
@@ -462,10 +537,15 @@
                                 </button>
 
 
+                                <!-- СООБЩЕНИЕ ОБ ОШИБКЕ -->
+
                                 <p
                                     id="noteAm"
                                     class="form-note"
                                 ></p>
+
+
+                                <!-- УСПЕШНАЯ ОТПРАВКА -->
 
                                 <p
                                     id="successAm"
@@ -487,6 +567,8 @@
 
     </main>
 
+
+    <!-- ================= JAVASCRIPT ================= -->
 
     <script src="script.js"></script>
 
