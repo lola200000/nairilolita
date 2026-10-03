@@ -4,29 +4,175 @@ document.addEventListener("DOMContentLoaded", () => {
     const introVideo = document.getElementById("introVideo");
     const skip = document.getElementById("skip");
 
-    const languageChoice = document.getElementById("languageChoice");
-    const introRu = document.getElementById("introRu");
-    const introAm = document.getElementById("introAm");
+    const languageChoice =
+        document.getElementById("languageChoice");
 
-    const site = document.getElementById("site");
-    const ru = document.getElementById("ru");
-    const am = document.getElementById("am");
+    const introRu =
+        document.getElementById("introRu");
 
-    const weddingMusic = document.getElementById("weddingMusic");
-    const musicButton = document.getElementById("musicButton");
+    const introAm =
+        document.getElementById("introAm");
+
+    const site =
+        document.getElementById("site");
+
+    const ru =
+        document.getElementById("ru");
+
+    const am =
+        document.getElementById("am");
+
+    const weddingMusic =
+        document.getElementById("weddingMusic");
+
+    const musicButton =
+        document.getElementById("musicButton");
 
 
     /* =========================================
        НАЧАЛЬНОЕ СОСТОЯНИЕ
     ========================================= */
 
-    site.style.display = "none";
-    languageChoice.style.display = "none";
+    if (site) {
+        site.style.display = "none";
+    }
 
-    ru.style.display = "none";
-    am.style.display = "none";
+    if (languageChoice) {
+        languageChoice.style.display = "none";
+    }
 
-    musicButton.style.display = "none";
+    if (ru) {
+        ru.style.display = "none";
+    }
+
+    if (am) {
+        am.style.display = "none";
+    }
+
+    if (musicButton) {
+        musicButton.style.display = "none";
+    }
+
+
+    /* =========================================
+       МУЗЫКА
+       ЗАПУСКАЕТСЯ ВМЕСТЕ С ВИДЕО
+    ========================================= */
+
+    function startMusic() {
+
+        if (!weddingMusic) {
+            return;
+        }
+
+        weddingMusic.volume = 0.1;
+
+        weddingMusic.play()
+            .then(() => {
+
+                console.log(
+                    "Музыка запущена"
+                );
+
+                if (musicButton) {
+                    musicButton.textContent = "♫";
+                }
+
+            })
+            .catch((error) => {
+
+                console.log(
+                    "Автозапуск музыки заблокирован браузером:",
+                    error
+                );
+
+            });
+    }
+
+
+    /* =========================================
+       ЗАПУСК ВИДЕО И МУЗЫКИ
+    ========================================= */
+
+    function startIntro() {
+
+        /* Видео */
+        if (introVideo) {
+
+            introVideo.currentTime = 0;
+
+            introVideo.play()
+                .then(() => {
+
+                    console.log(
+                        "Видео запущено"
+                    );
+
+                })
+                .catch((error) => {
+
+                    console.log(
+                        "Видео не запустилось:",
+                        error
+                    );
+
+                });
+
+        }
+
+
+        /* Музыка */
+        startMusic();
+
+    }
+
+
+    /*
+       Пытаемся запустить сразу.
+       Если браузер блокирует звук,
+       музыка попробует запуститься
+       после первого клика пользователя.
+    */
+
+    startIntro();
+
+
+    /* =========================================
+       ЕСЛИ БРАУЗЕР ЗАБЛОКИРОВАЛ МУЗЫКУ
+    ========================================= */
+
+    document.addEventListener(
+        "click",
+        () => {
+
+            if (
+                weddingMusic &&
+                weddingMusic.paused
+            ) {
+
+                weddingMusic.volume = 0.45;
+
+                weddingMusic.play()
+                    .then(() => {
+
+                        console.log(
+                            "Музыка запущена после действия пользователя"
+                        );
+
+                        if (musicButton) {
+                            musicButton.textContent = "♫";
+                        }
+
+                    })
+                    .catch(() => {});
+
+            }
+
+        },
+        {
+            once: true
+        }
+    );
 
 
     /* =========================================
@@ -35,28 +181,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function showLanguageChoice() {
 
-        // Останавливаем видео
+        /*
+           Останавливаем только видео.
+           Музыку НЕ останавливаем.
+        */
+
         if (introVideo) {
             introVideo.pause();
         }
 
-        // Убираем кнопку "Пропустить"
+
+        /* Убираем кнопку "Пропустить" */
+
         if (skip) {
             skip.style.display = "none";
         }
 
-        // Убираем intro
+
+        /* Убираем intro */
+
         if (intro) {
             intro.style.display = "none";
         }
 
-        // ПОКАЗЫВАЕМ ЯЗЫКИ
-        languageChoice.style.display = "flex";
 
-        // Показываем кнопку музыки
-        musicButton.style.display = "flex";
+        /* Показываем выбор языка */
 
-        console.log("Выбор языка показан");
+        if (languageChoice) {
+            languageChoice.style.display = "flex";
+        }
+
+
+        /* Показываем кнопку музыки */
+
+        if (musicButton) {
+            musicButton.style.display = "flex";
+        }
+
+
+        console.log(
+            "Выбор языка показан"
+        );
+
     }
 
 
@@ -66,28 +232,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (introVideo) {
 
-        introVideo.addEventListener("ended", () => {
+        introVideo.addEventListener(
+            "ended",
+            () => {
 
-            showLanguageChoice();
+                console.log(
+                    "Видео закончилось"
+                );
 
-        });
+                /*
+                   Музыку НЕ останавливаем.
+                */
+
+                showLanguageChoice();
+
+            }
+        );
 
     }
 
 
     /* =========================================
-       КНОПКА ПРОПУСТИТЬ
+       КНОПКА "ПРОПУСТИТЬ"
     ========================================= */
 
     if (skip) {
 
-        skip.addEventListener("click", () => {
+        skip.addEventListener(
+            "click",
+            () => {
 
-            console.log("Нажата кнопка Пропустить");
+                console.log(
+                    "Нажата кнопка Пропустить"
+                );
 
-            showLanguageChoice();
+                /*
+                   Музыка продолжает играть.
+                */
 
-        });
+                if (
+                    weddingMusic &&
+                    weddingMusic.paused
+                ) {
+
+                    startMusic();
+
+                }
+
+                showLanguageChoice();
+
+            }
+        );
 
     }
 
@@ -98,13 +293,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (introRu) {
 
-        introRu.addEventListener("click", () => {
+        introRu.addEventListener(
+            "click",
+            () => {
 
-            console.log("Выбран русский");
+                console.log(
+                    "Выбран русский"
+                );
 
-            openSite("ru");
+                openSite("ru");
 
-        });
+            }
+        );
 
     }
 
@@ -115,13 +315,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (introAm) {
 
-        introAm.addEventListener("click", () => {
+        introAm.addEventListener(
+            "click",
+            () => {
 
-            console.log("Выбран армянский");
+                console.log(
+                    "Выбран армянский"
+                );
 
-            openSite("am");
+                openSite("am");
 
-        });
+            }
+        );
 
     }
 
@@ -132,61 +337,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function openSite(language) {
 
-        languageChoice.style.display = "none";
+        if (languageChoice) {
+            languageChoice.style.display = "none";
+        }
 
-        site.style.display = "block";
+
+        if (site) {
+            site.style.display = "block";
+        }
+
 
         if (language === "ru") {
 
-            ru.style.display = "block";
-            am.style.display = "none";
+            if (ru) {
+                ru.style.display = "block";
+            }
+
+            if (am) {
+                am.style.display = "none";
+            }
 
             document.documentElement.lang = "ru";
 
         } else {
 
-            am.style.display = "block";
-            ru.style.display = "none";
+            if (am) {
+                am.style.display = "block";
+            }
+
+            if (ru) {
+                ru.style.display = "none";
+            }
 
             document.documentElement.lang = "hy";
+
         }
 
 
-        // Музыка
-        startMusic();
+        /*
+           Музыку здесь НЕ запускаем заново.
+           Она уже играет с начала видео.
+        */
 
 
-        // Вверх страницы
-        window.scrollTo(0, 0);
-
-    }
-
-
-    /* =========================================
-       МУЗЫКА
-    ========================================= */
-
-    function startMusic() {
-
-        if (!weddingMusic) {
-            return;
-        }
-
-        weddingMusic.volume = 0.45;
-
-        weddingMusic.play()
-            .then(() => {
-
-                musicButton.textContent = "♫";
-
-            })
-            .catch(() => {
-
-                console.log(
-                    "Автозапуск музыки заблокирован браузером"
-                );
-
-            });
+        window.scrollTo(
+            0,
+            0
+        );
 
     }
 
@@ -197,27 +394,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (musicButton) {
 
-        musicButton.addEventListener("click", () => {
+        musicButton.addEventListener(
+            "click",
+            (event) => {
 
-            if (weddingMusic.paused) {
+                /*
+                   Чтобы глобальный click
+                   не мешал кнопке.
+                */
 
-                weddingMusic.play()
-                    .then(() => {
+                event.stopPropagation();
 
-                        musicButton.textContent = "♫";
 
-                    })
-                    .catch(() => {});
+                if (
+                    weddingMusic &&
+                    weddingMusic.paused
+                ) {
 
-            } else {
+                    weddingMusic.volume = 0.45;
 
-                weddingMusic.pause();
+                    weddingMusic.play()
+                        .then(() => {
 
-                musicButton.textContent = "♪";
+                            musicButton.textContent =
+                                "♫";
+
+                        })
+                        .catch((error) => {
+
+                            console.log(
+                                "Не удалось включить музыку:",
+                                error
+                            );
+
+                        });
+
+                } else {
+
+                    if (weddingMusic) {
+
+                        weddingMusic.pause();
+
+                    }
+
+                    musicButton.textContent = "♪";
+
+                }
 
             }
-
-        });
+        );
 
     }
 
@@ -227,18 +452,23 @@ document.addEventListener("DOMContentLoaded", () => {
     ========================================= */
 
     const rsvpFormRu =
-        document.getElementById("rsvpFormRu");
+        document.getElementById(
+            "rsvpFormRu"
+        );
 
 
     if (rsvpFormRu) {
 
-        rsvpFormRu.addEventListener("submit", async (event) => {
+        rsvpFormRu.addEventListener(
+            "submit",
+            async (event) => {
 
-            event.preventDefault();
+                event.preventDefault();
 
-            await sendRSVP("ru");
+                await sendRSVP("ru");
 
-        });
+            }
+        );
 
     }
 
@@ -248,18 +478,23 @@ document.addEventListener("DOMContentLoaded", () => {
     ========================================= */
 
     const rsvpFormAm =
-        document.getElementById("rsvpFormAm");
+        document.getElementById(
+            "rsvpFormAm"
+        );
 
 
     if (rsvpFormAm) {
 
-        rsvpFormAm.addEventListener("submit", async (event) => {
+        rsvpFormAm.addEventListener(
+            "submit",
+            async (event) => {
 
-            event.preventDefault();
+                event.preventDefault();
 
-            await sendRSVP("am");
+                await sendRSVP("am");
 
-        });
+            }
+        );
 
     }
 
@@ -272,6 +507,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let name;
         let attendance;
+        let side;
         let guests;
         let message;
 
@@ -281,192 +517,399 @@ document.addEventListener("DOMContentLoaded", () => {
         let form;
 
 
+        /* =====================================
+           РУССКИЙ
+        ===================================== */
+
         if (language === "ru") {
 
             form = rsvpFormRu;
+
 
             name = document
                 .getElementById("nameRu")
                 .value
                 .trim();
 
+
             attendance = document
                 .getElementById("attendanceRu")
                 .value;
 
+
+            side = document
+                .getElementById("sideRu")
+                .value;
+
+
             guests = document
                 .getElementById("guestsRu")
                 .value;
+
 
             message = document
                 .getElementById("messageRu")
                 .value
                 .trim();
 
+
             submitButton =
-                document.getElementById("submitRu");
+                document.getElementById(
+                    "submitRu"
+                );
+
 
             note =
-                document.getElementById("noteRu");
+                document.getElementById(
+                    "noteRu"
+                );
+
 
             success =
-                document.getElementById("successRu");
+                document.getElementById(
+                    "successRu"
+                );
 
-        } else {
+        }
+
+
+        /* =====================================
+           АРМЯНСКИЙ
+        ===================================== */
+
+        else {
 
             form = rsvpFormAm;
+
 
             name = document
                 .getElementById("nameAm")
                 .value
                 .trim();
 
+
             attendance = document
                 .getElementById("attendanceAm")
                 .value;
 
+
+            side = document
+                .getElementById("sideAm")
+                .value;
+
+
             guests = document
                 .getElementById("guestsAm")
                 .value;
+
 
             message = document
                 .getElementById("messageAm")
                 .value
                 .trim();
 
+
             submitButton =
-                document.getElementById("submitAm");
+                document.getElementById(
+                    "submitAm"
+                );
+
 
             note =
-                document.getElementById("noteAm");
+                document.getElementById(
+                    "noteAm"
+                );
+
 
             success =
-                document.getElementById("successAm");
+                document.getElementById(
+                    "successAm"
+                );
 
         }
 
+
+        /* =====================================
+           ОЧИСТКА СООБЩЕНИЙ
+        ===================================== */
 
         if (note) {
+
             note.textContent = "";
+
         }
+
 
         if (success) {
+
             success.textContent = "";
+
         }
 
 
-        /* ПРОВЕРКА */
+        /* =====================================
+           ПРОВЕРКА
+        ===================================== */
 
-        if (!name || !attendance || !guests) {
+        if (
+            !name ||
+            !attendance ||
+            !side ||
+            !guests
+        ) {
 
-            note.textContent =
-                language === "ru"
-                    ? "Пожалуйста, заполните обязательные поля."
-                    : "Խնդրում ենք լրացնել պարտադիր դաշտերը։";
+            if (note) {
+
+                note.textContent =
+                    language === "ru"
+
+                        ? "Пожалуйста, заполните обязательные поля."
+
+                        : "Խնդրում ենք լրացնել պարտադիր դաշտերը։";
+
+            }
 
             return;
+
         }
 
 
-        submitButton.disabled = true;
+        /* Блокируем кнопку */
 
+        if (submitButton) {
+
+            submitButton.disabled = true;
+
+        }
+
+
+        /* =====================================
+           ТЕКСТ ПРИСУТСТВИЯ
+        ===================================== */
 
         const attendanceText =
+
             language === "ru"
 
                 ? (
+
                     attendance === "yes"
+
                         ? "С радостью буду"
+
                         : "К сожалению, не смогу"
+
                 )
 
                 : (
+
                     attendance === "yes"
+
                         ? "Սիրով կմասնակցեմ"
+
                         : "Ցավոք, չեմ կարողանա"
+
                 );
 
+
+        /* =====================================
+           ТЕКСТ СТОРОНЫ
+        ===================================== */
+
+        const sideText =
+
+            language === "ru"
+
+                ? (
+
+                    side === "groom"
+
+                        ? "Со стороны жениха"
+
+                        : "Со стороны невесты"
+
+                )
+
+                : (
+
+                    side === "groom"
+
+                        ? "Փեսայի կողմից"
+
+                        : "Հարսի կողմից"
+
+                );
+
+
+        /* =====================================
+           ДАННЫЕ RSVP
+        ===================================== */
 
         const data = {
 
             language:
+
                 language === "ru"
+
                     ? "Русский"
+
                     : "Հայերեն",
+
 
             name: name,
 
-            attendance: attendanceText,
 
-            guests: guests,
+            attendance:
+                attendanceText,
 
-            message: message || "—",
+
+            side:
+                sideText,
+
+
+            guests:
+                guests,
+
+
+            message:
+                message || "—",
+
 
             subject:
                 "RSVP — " +
                 name +
                 " — Nairi & Lolita"
+
         };
 
+
+        /* =====================================
+           ОТПРАВКА
+        ===================================== */
 
         try {
 
             const response = await fetch(
+
                 "https://formsubmit.co/ajax/harsanik1311@gmail.com",
+
                 {
+
                     method: "POST",
 
+
                     headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Accept":
+                            "application/json"
+
                     },
 
-                    body: JSON.stringify(data)
+
+                    body:
+                        JSON.stringify(data)
+
                 }
+
             );
 
 
-            const result = await response.json();
+            const result =
+                await response.json();
 
 
-            if (response.ok && result.success !== false) {
+            /* =================================
+               УСПЕШНАЯ ОТПРАВКА
+            ================================= */
 
-                success.textContent =
-                    language === "ru"
+            if (
+                response.ok &&
+                result.success !== false
+            ) {
 
-                        ? "Спасибо ♥ Ваш ответ отправлен."
+                if (success) {
 
-                        : "Շնորհակալություն ♥ Ձեր պատասխանը ուղարկված է։";
+                    success.textContent =
 
-                form.reset();
+                        language === "ru"
 
-            } else {
+                            ? "Спасибо ♥ Ваш ответ отправлен."
 
-                note.textContent =
-                    language === "ru"
+                            : "Շնորհակալություն ♥ Ձեր պատասխանը ուղարկված է։";
 
-                        ? "Не удалось отправить ответ."
+                }
 
-                        : "Չհաջողվեց ուղարկել պատասխանը։";
+
+                if (form) {
+
+                    form.reset();
+
+                }
 
             }
 
 
-        } catch (error) {
+            /* =================================
+               ОШИБКА ОТПРАВКИ
+            ================================= */
 
-            console.error(error);
+            else {
 
-            note.textContent =
-                language === "ru"
+                if (note) {
 
-                    ? "Ошибка соединения."
+                    note.textContent =
 
-                    : "Կապի սխալ։";
+                        language === "ru"
+
+                            ? "Не удалось отправить ответ."
+
+                            : "Չհաջողվեց ուղարկել պատասխանը։";
+
+                }
+
+            }
+
 
         }
 
 
-        submitButton.disabled = false;
+        /* =====================================
+           ОШИБКА СОЕДИНЕНИЯ
+        ===================================== */
+
+        catch (error) {
+
+            console.error(
+                "RSVP error:",
+                error
+            );
+
+
+            if (note) {
+
+                note.textContent =
+
+                    language === "ru"
+
+                        ? "Ошибка соединения."
+
+                        : "Կապի սխալ։";
+
+            }
+
+        }
+
+
+        /* Разблокируем кнопку */
+
+        if (submitButton) {
+
+            submitButton.disabled = false;
+
+        }
 
     }
 
